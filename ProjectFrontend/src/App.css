@@ -1,0 +1,478 @@
+/*
+The following files can be safely removed to optimize the application:
+1. Expence Tracker/src/assets/react.svg (unused React logo)
+2. Expence Tracker/public/vite.svg (unused Vite logo)
+3. Expence Tracker/src/assets/signup.css (not imported anywhere)
+4. Expence Tracker/src/assets/landing/css/style.css.map (source map not needed for production)
+5. Most images in Expence Tracker/src/assets/landing/images/ (only a few are used in the LandingPage)
+6. Duplicate libraries:
+   - Expence Tracker/src/assets/landing/js/jquery-3.4.1.min.js (jQuery not needed in React)
+   - Expence Tracker/src/assets/landing/js/bootstrap.js (Bootstrap JS already included via npm)
+7. Expence Tracker/src/assets/landing/css/bootstrap.css (Bootstrap already included via npm)
+
+These optimizations will reduce bundle size and improve load times.
+*/
+
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Remove padding from the default styles */
+.card {
+  padding: 0;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Navbar styling */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.8rem 1rem;
+  z-index: 1000;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.app-header .container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Search input in navbar */
+.search-box {
+  position: relative;
+  margin-right: 15px;
+}
+
+.search-input {
+  background-color: #f5f7fa;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  width: 200px;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  width: 240px;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(84, 105, 212, 0.25);
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+/* Sidebar styling */
+.app-sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1030;
+  background-color: #1e2c4f;
+  background-image: linear-gradient(180deg, #1e2c4f 0%, #2c3358 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  padding-top: 0;
+}
+
+.sidebar-brand {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.brand-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-menu {
+  padding: 0 1rem;
+}
+
+.nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid #5469d4;
+  color: white;
+}
+
+.nav-icon {
+  margin-right: 0.75rem;
+  width: 1.25rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.nav-arrow {
+  transition: transform 0.3s;
+  margin-left: auto;
+}
+
+.menu-open > .nav-link .nav-arrow {
+  transform: rotate(90deg);
+}
+
+.nav-treeview {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  display: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-open .nav-treeview {
+  display: block;
+}
+
+.nav-treeview .nav-link {
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+}
+
+.app-main {
+  margin-left: 250px;
+  padding: 0;
+  margin-top: 60px;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+/* Dashboard Styling */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: #333;
+}
+
+.stat-card {
+  padding: 1.25rem;
+  height: 100%;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.stat-title {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  color: #333;
+}
+
+/* Category Icon */
+.category-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* Improve expense table styling */
+.table thead th {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  color: #666;
+  font-weight: 600;
+  background-color: #f8f9fa;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table-hover tbody tr {
+  transition: all 0.2s;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(84, 105, 212, 0.05);
+}
+
+/* View button styling */
+.btn-view {
+  background-color: #c5ed4d;
+  color: #333;
+  border: none;
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.btn-view:hover {
+  background-color: #b8dd40;
+  color: #333;
+}
+
+/* Add New Expense button */
+.btn-success {
+  background-color: #c5ed4d;
+  color: #333;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #b8dd40;
+  color: #333;
+}
+
+/* Card styling */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+  margin-bottom: 1.5rem;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.25rem;
+}
+
+.card-header h5 {
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* Empty state styling */
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  color: #d1d5db;
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+/* Floating action button */
+.floating-action-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #5469d4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-action-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* Responsive styling */
+@media (max-width: 991.98px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .app-sidebar.show {
+    transform: translateX(0);
+  }
+  
+  .app-main {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .search-input {
+    width: 150px;
+  }
+  
+  .search-input:focus {
+    width: 180px;
+  }
+  
+  .stat-card {
+    margin-bottom: 1rem;
+  }
+  
+  .card-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Admin navbar styling */
+.admin-profile {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.admin-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(84, 105, 212, 0.1);
+  color: #5469d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.admin-name {
+  font-weight: 500;
+  color: #333;
+}

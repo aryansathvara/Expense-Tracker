@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      
+      #root {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      
+      /* Fix sidebar styling */
+      .sidebar-resize-handle {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+      
+      .app-sidebar {
+        width: 250px !important;
+        min-width: 250px !important;
+        max-width: 250px !important;
+        flex-basis: 250px !important;
+        resize: none !important;
+        user-select: none !important;
+      }
+      
+      /* Prevent any slider functionality */
+      *::-webkit-resizer,
+      *::-webkit-scrollbar-corner,
+      *::-webkit-scrollbar-button {
+        display: none !important;
+      }
+      
+      /* Force fixed sidebar width */
+      :root {
+        --sidebar-width: 250px !important;
+      }
+    </style>
+    <script>
+      // Initialize profile data if not present in localStorage
+      window.onload = function() {
+        if (!localStorage.getItem('userProfileData')) {
+          // Set default profile data
+          const defaultData = {
+            firstName: 'akash',
+            lastName: 'patel',
+            email: 'akash@gmail.com',
+            phone: '7733457689',
+            address: 'panchsheel society',
+            registrationIp: '192.168.1.1',
+            lastLogin: new Date().toISOString(),
+            accountStatus: 'active',
+            accountType: 'Regular User',
+            securityQuestions: [
+              { question: 'What was your first pet\'s name?', answered: true },
+              { question: 'What is your mother\'s maiden name?', answered: true }
+            ]
+          };
+          
+          localStorage.setItem('userProfileData', JSON.stringify(defaultData));
+          console.log('Default profile data initialized');
+        } else {
+          // Validate existing data to ensure it's complete
+          try {
+            const existingData = JSON.parse(localStorage.getItem('userProfileData'));
+            // Check if critical fields exist
+            if (!existingData.firstName || !existingData.lastName || !existingData.email) {
+              console.log('Incomplete profile data found, reinitializing...');
+              // Set default profile data
+              const defaultData = {
+                firstName: 'akash',
+                lastName: 'patel',
+                email: 'akash@gmail.com',
+                phone: '7733457689',
+                address: 'panchsheel society',
+                registrationIp: '192.168.1.1',
+                lastLogin: new Date().toISOString(),
+                accountStatus: 'active',
+                accountType: 'Regular User',
+                securityQuestions: [
+                  { question: 'What was your first pet\'s name?', answered: true },
+                  { question: 'What is your mother\'s maiden name?', answered: true }
+                ]
+              };
+              
+              localStorage.setItem('userProfileData', JSON.stringify(defaultData));
+              console.log('Profile data reinitialized with defaults');
+            }
+          } catch (err) {
+            console.error('Error validating profile data:', err);
+            // If error, reinitialize
+            const defaultData = {
+              firstName: 'akash',
+              lastName: 'patel',
+              email: 'akash@gmail.com',
+              phone: '7733457689',
+              address: 'panchsheel society',
+              registrationIp: '192.168.1.1',
+              lastLogin: new Date().toISOString(),
+              accountStatus: 'active',
+              accountType: 'Regular User',
+              securityQuestions: [
+                { question: 'What was your first pet\'s name?', answered: true },
+                { question: 'What is your mother\'s maiden name?', answered: true }
+              ]
+            };
+            
+            localStorage.setItem('userProfileData', JSON.stringify(defaultData));
+            console.log('Profile data reinitialized after error');
+          }
+        }
+        
+        // Remove any resize event listeners that might be attached to the sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+          const sidebarElements = document.querySelectorAll('.app-sidebar, .sidebar-resize-handle');
+          sidebarElements.forEach(function(el) {
+            el.onmousedown = null;
+            el.onmousemove = null;
+            el.onmouseup = null;
+            el.ondragstart = function() { return false; };
+          });
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html> 

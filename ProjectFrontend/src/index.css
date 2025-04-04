@@ -1,0 +1,1466 @@
+/* Modern Expense Tracker Theme */
+:root {
+  --primary-color: #5469d4;
+  --secondary-color: #1a1f36;
+  --success-color: #0a8852;
+  --info-color: #17a2b8;
+  --warning-color: #ffba08;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --sidebar-width: 250px !important;
+  --header-height: 60px;
+  --card-border-radius: 10px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --box-shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+/* Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--gray-800);
+  background-color: #f7f8fc;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: #4255b1;
+  text-decoration: none;
+}
+
+/* Layout */
+.app-wrapper {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar - Fix position and ensure it's flush with the viewport edge */
+.app-sidebar {
+  width: 250px !important;
+  min-width: 250px !important;
+  max-width: 250px !important;
+  position: fixed !important;
+  left: 0 !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  resize: none !important;
+  overflow-x: hidden !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.125) !important;
+  top: 0;
+  height: 100vh;
+  background-color: var(--secondary-color);
+  color: #fff;
+  z-index: 1030;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0 1rem;
+}
+
+.brand-link {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  width: 100%;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.brand-text {
+  display: inline-block;
+  padding: 0.5rem 0;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.sidebar-menu {
+  padding: 1rem 0;
+}
+
+.nav-item {
+  margin-bottom: 0.25rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all var(--transition-speed) ease;
+  border-left: 3px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left-color: var(--primary-color);
+}
+
+.nav-link.active {
+  font-weight: 500;
+  box-shadow: 0 0 8px rgba(84, 105, 212, 0.3);
+  background-color: rgba(84, 105, 212, 0.15);
+}
+
+.nav-icon {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-link p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+}
+
+.nav-arrow {
+  margin-left: auto;
+  transition: transform var(--transition-speed) ease;
+  font-size: 0.75rem;
+}
+
+.menu-open > .nav-link .nav-arrow {
+  transform: rotate(90deg);
+}
+
+.nav-treeview {
+  margin-left: 2.5rem;
+  display: none;
+  font-size: 0.9rem;
+}
+
+.menu-open > .nav-treeview {
+  display: block;
+  padding-top: 0.5rem;
+}
+
+.nav-treeview .nav-link {
+  padding: 0.5rem 1rem;
+}
+
+/* Main Content Area - Ensure it positions correctly relative to sidebar */
+.app-main {
+  flex: 1;
+  margin-left: 250px !important;
+  width: calc(100% - 250px) !important;
+  min-height: 100vh;
+  padding: 0 !important;
+  padding-top: var(--header-height) !important;
+  transition: margin-left 0.3s ease !important;
+  background-color: #f7f8fc;
+  overflow-x: hidden;
+  box-sizing: border-box !important;
+  display: block;
+  position: relative;
+  float: none;
+}
+
+/* Header/Navbar */
+.app-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 250px;
+  height: var(--header-height);
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  transition: left 0.3s ease, width 0.3s ease;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 250px);
+}
+
+/* Improve navbar item alignment */
+.app-header .d-flex.justify-content-between {
+  height: 100%;
+}
+
+.app-header .d-flex.align-items-center {
+  height: 100%;
+}
+
+/* Fix vertical alignment of navbar buttons */
+.app-header .btn,
+.app-header .dropdown-toggle {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fix avatar alignment */
+.app-header .dropdown {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.app-header .dropdown-toggle {
+  height: 100%;
+}
+
+/* Add navbar button alignment fixes */
+.app-header .btn,
+.app-header .dropdown-toggle,
+.app-header .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nav buttons */
+.nav-btn {
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(84, 105, 212, 0.1);
+  color: var(--primary-color);
+}
+
+.active-nav-btn {
+  background-color: rgba(84, 105, 212, 0.15);
+  color: var(--primary-color);
+}
+
+.app-header .container-fluid {
+  height: 100%;
+  padding: 0 1.5rem;
+}
+
+.header-search {
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-input {
+  padding-left: 2.5rem;
+  background-color: var(--gray-100);
+  border: none;
+  border-radius: 50px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+}
+
+/* Dashboard Components */
+.dashboard-container {
+  padding: 1.5rem;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+  margin-bottom: 0;
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1.25rem 1.5rem;
+}
+
+.card-title {
+  font-weight: 600;
+  color: var(--secondary-color);
+  margin-bottom: 0;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Stats Cards */
+.stat-card {
+  padding: 1.25rem;
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.stat-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-600);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 0;
+}
+
+/* Tables */
+.table {
+  color: var(--gray-800);
+  margin-bottom: 0;
+}
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  color: var(--gray-600);
+  padding: 0.75rem 1.25rem;
+  border-top: none;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.table td {
+  padding: 1rem 1.25rem;
+  vertical-align: middle;
+  border-top: none;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-hover tbody tr {
+  transition: background-color var(--transition-speed) ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(84, 105, 212, 0.05);
+}
+
+/* Category & Amount Tags */
+.category-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.amount {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.date {
+  color: var(--gray-600);
+  font-size: 0.85rem;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--gray-400);
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  color: var(--gray-600);
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #4255b1;
+  border-color: #4255b1;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Landing Page Styles */
+.landing-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.landing-header {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.hero-section {
+  padding: 6rem 0 4rem;
+  background: url('/hero-bg.svg') no-repeat center center;
+  background-size: cover;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+}
+
+.hero-text {
+  font-size: 1.25rem;
+  color: var(--gray-700);
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: rgba(84, 105, 212, 0.1);
+  color: var(--primary-color);
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+.feature-text {
+  color: var(--gray-600);
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+  .app-sidebar {
+    left: -250px !important;
+  }
+  
+  .app-sidebar.show {
+    left: 0 !important;
+  }
+  
+  .app-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  .app-header {
+    left: 0;
+    width: 100% !important;
+  }
+
+  /* Adjust dashboard layout for mobile */
+  .dashboard-wrapper .row .col-md-4,
+  .dashboard-wrapper .row .col-lg-6 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Make sure tables are scrollable on mobile */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* User sidebar toggle button */
+  .sidebar-toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1031;
+    transition: all 0.3s;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: #1e2c4f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: block;
+  }
+
+  .sidebar-toggle-btn.sidebar-open {
+    left: 260px;
+  }
+  
+  /* User sidebar backdrop for mobile */
+  .admin-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1025;
+    display: none;
+  }
+  
+  .admin-backdrop.show {
+    display: block;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .hero-section {
+    padding: 4rem 0 2rem;
+  }
+  
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  
+  /* Ensure content is properly padded on small devices */
+  .app-main {
+    padding: 0 !important;
+  }
+  
+  /* Adjust navbar elements for mobile */
+  .app-header .page-title {
+    font-size: 1.5rem;
+  }
+  
+  /* Ensure consistent spacing in mobile view */
+  .app-main .container-fluid {
+    padding: 0.75rem !important;
+  }
+}
+
+/* Contact Page Styles */
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgba(84, 105, 212, 0.1);
+  font-size: 1.25rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+/* Make sure there's no unwanted padding in container-fluid */
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Content container specific styling */
+.app-main .container-fluid {
+  padding: 1.5rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Page content general rules */
+.container-fluid.py-4 {
+  padding: 1rem !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Fix any spacing in the dashboard and other pages */
+.dashboard-container,
+.settings-container,
+.reports-container,
+.expense-management-container {
+  padding: 1.5rem;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure direct children of app-main don't have unwanted margin */
+.app-main > div {
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden;
+}
+
+/* Aggressively remove margin/padding on first level containers */
+.app-main > .container-fluid {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+/* Fix Dashboard Layout Issues */
+.app-main > div.container-fluid {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure Dashboard Components Have Proper Padding */
+.app-main > .container-fluid > .row {
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+/* More aggressive fix for dashboard components */
+.dashboard-container,
+.page-title,
+.dashboard-header {
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Override Bootstrap row margins to eliminate unwanted space */
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Clear any potential row or column margin/padding issues */
+.container-fluid.py-4 > .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.container-fluid.py-4 > .row > [class*="col-"] {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+/* Fix any Bootstrap injected spacing */
+.app-main .container-fluid.py-4,
+.app-main .dashboard-container {
+  --bs-gutter-x: 0 !important;
+  --bs-gutter-y: 0 !important;
+}
+
+/* Reset all app components to border-box */
+.app-wrapper *, 
+.app-wrapper *::before, 
+.app-wrapper *::after {
+  box-sizing: border-box !important;
+}
+
+/* Remove unwanted space/margin on right side */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fix container width on landing page */
+.landing-page .container,
+.landing-page .container-fluid {
+  max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow-x: hidden;
+}
+
+/* Admin Sidebar */
+.admin-sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1030;
+  background-color: #1e2c4f;
+  background-image: linear-gradient(180deg, #1e2c4f 0%, #2c3358 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  padding-top: 0;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1031;
+  transition: all 0.3s;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: #1e2c4f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar-toggle-btn.sidebar-open {
+  left: 260px;
+}
+
+/* Admin Sidebar Brand */
+.sidebar-brand {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.brand-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: block;
+}
+
+.brand-text {
+  margin-left: 0.5rem;
+}
+
+/* Admin Sidebar Menu */
+.sidebar-menu {
+  padding: 0 1rem;
+}
+
+.admin-sidebar .nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.admin-sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.admin-sidebar .nav-link:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid #5469d4;
+  color: white;
+}
+
+.admin-sidebar .nav-icon {
+  margin-right: 0.75rem;
+  width: 1.25rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.admin-sidebar .nav-arrow {
+  transition: transform 0.3s;
+  margin-left: auto;
+}
+
+.admin-sidebar .menu-open .nav-arrow {
+  transform: rotate(90deg);
+}
+
+.admin-sidebar .nav-treeview {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  display: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar .menu-open .nav-treeview {
+  display: block;
+}
+
+.admin-sidebar .nav-treeview .nav-link {
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+}
+
+/* Main Content Area */
+.admin-main {
+  margin-left: 0;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.admin-main.sidebar-open {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+}
+
+.admin-container {
+  flex: 1;
+  padding: 1rem;
+  position: relative;
+}
+
+/* Backdrop for mobile */
+.admin-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1025;
+  display: none;
+}
+
+.admin-backdrop.show {
+  display: block;
+}
+
+/* Admin Table Styles */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.admin-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.admin-table td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.admin-table tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Admin Dashboard Cards */
+.admin-stat-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.admin-stat-card .stat-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+}
+
+.admin-stat-card .stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.admin-stat-card .stat-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Admin Navbar Styles */
+.admin-navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-left, .navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3358;
+  margin: 0;
+}
+
+.search-box {
+  position: relative;
+  margin-right: 1.5rem;
+}
+
+.search-input {
+  width: 250px;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 50px;
+  border: 1px solid #e9ecef;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  width: 300px;
+  background-color: #fff;
+  border-color: #5469d4;
+  box-shadow: 0 0 0 0.2rem rgba(84, 105, 212, 0.25);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.notification-bell {
+  position: relative;
+  margin-right: 1.5rem;
+  font-size: 1.1rem;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #dc3545;
+  color: #fff;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.admin-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f1f3f9;
+  color: #5469d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+}
+
+.admin-name {
+  font-weight: 500;
+  color: #495057;
+}
+
+@media (max-width: 767.98px) {
+  .admin-navbar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .search-input {
+    width: 180px;
+  }
+  
+  .search-input:focus {
+    width: 220px;
+  }
+  
+  .notification-bell {
+    margin-right: 1rem;
+  }
+}
+
+/* Admin Card and Page Elements */
+.admin-page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3358;
+  margin-bottom: 0;
+}
+
+.admin-card {
+  border-radius: 8px;
+  border: none;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.admin-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.admin-card .card-header {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.5rem;
+}
+
+.admin-card .card-header h5 {
+  font-weight: 600;
+  color: #2c3358;
+  margin-bottom: 0;
+}
+
+.admin-card .card-body {
+  padding: 1.5rem;
+}
+
+/* For admin expense details page */
+.admin-expense-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* For dashboard stat cards */
+.admin-dashboard .admin-stat-card {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.admin-dashboard .admin-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply proper spacing in admin container */
+.admin-container {
+  padding: 1.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .admin-page-title {
+    font-size: 1.25rem;
+  }
+  
+  .admin-card .card-body,
+  .admin-card .card-header {
+    padding: 1rem;
+  }
+  
+  .admin-container {
+    padding: 1rem;
+  }
+}
+
+/* Responsive styles for Admin Sidebar */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    transform: translateX(-250px);
+  }
+  
+  .admin-sidebar.show {
+    transform: translateX(0);
+  }
+  
+  .admin-main, 
+  .admin-main.sidebar-open {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .admin-container {
+    padding: 0.75rem;
+  }
+  
+  .admin-table {
+    font-size: 0.875rem;
+  }
+  
+  .admin-table th, 
+  .admin-table td {
+    padding: 0.5rem;
+  }
+  
+  .admin-stat-card {
+    padding: 1rem;
+  }
+}
+
+/* Mobile view specific styles */
+body.mobile-view .app-sidebar {
+  transform: translateX(-250px);
+}
+
+body.mobile-view .app-sidebar.show {
+  transform: translateX(0);
+}
+
+body.mobile-view .app-main {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+body.mobile-view .app-header {
+  left: 0;
+  width: 100%;
+}
+
+body.mobile-view .sidebar-toggle-btn {
+  display: block;
+}
+
+/* Fix for sidebar toggle button visibility on desktop */
+.sidebar-toggle-btn {
+  display: none;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar-toggle-btn {
+    display: block;
+  }
+}
+
+/* Add floating action button styles */
+.floating-action-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #5469d4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-action-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* Fix container padding in dashboard */
+.app-main .container-fluid.p-0 {
+  padding-top: 20px !important;
+}
+
+.app-main .container-fluid .row.g-0 .col-12 {
+  padding-top: 15px;
+}
+
+/* Make sure page content doesn't overflow */
+.app-main > div {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden;
+}
+
+/* Mobile view specific styles */
+
+/* Dashboard wrapper */
+.dashboard-wrapper {
+  padding-top: 10px;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Add navbar button alignment fixes */
+.app-header .btn,
+.app-header .dropdown-toggle,
+.app-header .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-header .btn i,
+.app-header .dropdown-toggle i,
+.app-header .nav-link i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Fix icon alignment in buttons */
+.btn i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile view specific styles */
+
+/* Navbar actions specific styling */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-top: 2px; /* slight padding to push buttons down */
+}
+
+.navbar-actions .btn,
+.navbar-actions .dropdown {
+  position: relative;
+  top: 3px; /* push buttons down slightly */
+}
+
+/* Fix icon alignment in buttons */
+
+/* Align all elements in the navbar */
+.app-header .d-flex.justify-content-between.align-items-center {
+  align-items: center !important;
+}
+
+.app-header .page-title {
+  line-height: 60px; /* Match the header height for vertical centering */
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Navbar actions specific styling */
+
+/* Sidebar resize handle */
+.sidebar-resize-handle {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+}
+
+/* Sidebar controls */
+.sidebar-controls {
+  display: none;
+}
+
+/* Ensure no user can select or interact with the slider */
+.app-wrapper * {
+  user-select: contain;
+}
+
